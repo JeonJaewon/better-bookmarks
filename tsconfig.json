@@ -4,9 +4,9 @@
     "sourceMap": true,
     "noImplicitAny": true,
     "target": "es6",
-    "module": "commonjs",
+    "module": "esnext",
     "jsx": "react",
     "allowJs": true,
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": true
   }
 }
