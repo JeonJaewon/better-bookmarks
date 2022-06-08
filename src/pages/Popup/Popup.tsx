@@ -1,9 +1,15 @@
-import React from 'react';
+import { css, jsx } from '@emotion/react';
 
 const Popup = () => {
   return (
     <>
-      <div>popup</div>
+      <div
+        css={css`
+          padding: 50px;
+        `}
+      >
+        popup
+      </div>
     </>
   );
 };
