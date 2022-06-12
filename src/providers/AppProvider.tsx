@@ -1,4 +1,4 @@
-import { ThemeProvider } from '@emotion/react';
+import { css, Global, ThemeProvider } from '@emotion/react';
 import { darkTheme } from '../styles/themes';
 
 type AppProviderProps = {
@@ -6,5 +6,16 @@ type AppProviderProps = {
 };
 
 export const AppProvider = ({ children }: AppProviderProps) => {
-  return <ThemeProvider theme={darkTheme}>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider theme={darkTheme}>
+      <Global
+        styles={css`
+          body {
+            margin: 0;
+          }
+        `}
+      />
+      {children}
+    </ThemeProvider>
+  );
 };
