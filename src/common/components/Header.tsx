@@ -3,7 +3,7 @@ import { css, Theme, useTheme } from '@emotion/react';
 const styles = {
   wrapper: (theme: Theme) =>
     css({
-      backgroundColor: theme.colors.secondaryBackground,
+      backgroundColor: theme.secondaryBackground,
       height: 60,
     }),
 };

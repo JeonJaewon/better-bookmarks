@@ -11,6 +11,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
       <Global
         styles={css`
           body {
+            box-sizing: border-box;
             margin: 0;
           }
         `}

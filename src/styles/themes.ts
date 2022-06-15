@@ -2,16 +2,18 @@ import { Theme } from '@emotion/react';
 
 declare module '@emotion/react' {
   export interface Theme {
-    colors: {
-      primaryBackground: string;
-      secondaryBackground: string;
+    primaryBackground: string;
+    secondaryBackground: string;
+    item: {
+      backgroundColor: string;
     };
   }
 }
 
 export const darkTheme: Theme = {
-  colors: {
-    primaryBackground: '#1A1C1E',
-    secondaryBackground: '#272A30',
+  primaryBackground: '#1A1C1E',
+  secondaryBackground: '#272A30',
+  item: {
+    backgroundColor: '#373A3C',
   },
 };
