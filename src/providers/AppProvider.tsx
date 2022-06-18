@@ -1,4 +1,5 @@
 import { css, Global, ThemeProvider } from '@emotion/react';
+import { FilterProvider } from '../common/contexts/FilterContext';
 import { resetCSS } from '../styles/globals';
 import { darkTheme } from '../styles/themes';
 
@@ -10,7 +11,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
   return (
     <ThemeProvider theme={darkTheme}>
       <Global styles={resetCSS} />
-      {children}
+      <FilterProvider>{children}</FilterProvider>
     </ThemeProvider>
   );
 };
