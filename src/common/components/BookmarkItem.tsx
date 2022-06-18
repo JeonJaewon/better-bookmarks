@@ -6,6 +6,9 @@ const styles = {
       display: 'flex',
       alignItems: 'center',
       cursor: 'pointer',
+      color: '#ffffff',
+      justifyContent: 'space-between',
+      padding: '0 12px',
       backgroundColor: theme.item.backgroundColor,
       height: 50,
       marginBottom: 24,
@@ -22,11 +25,10 @@ interface BookmarkItemProps {
 const BookmarkItem = ({ title, uri, createdAt }: BookmarkItemProps) => {
   const theme = useTheme();
   return (
-    <div css={styles.wrapper(theme)}>
-      <a target="_blank" rel="noreferrer" href={uri}>
-        {title}
-      </a>
-    </div>
+    <a css={styles.wrapper(theme)} target="_blank" rel="noreferrer" href={uri}>
+      <span>{title}</span>
+      <span>{createdAt.toLocaleDateString()}</span>
+    </a>
   );
 };
 
