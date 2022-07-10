@@ -11,9 +11,13 @@
   "license": "ISC",
   "dependencies": {
     "@emotion/react": "^11.9.0",
+    "@mantine/core": "^4.2.12",
+    "@mantine/modals": "^4.2.12",
     "dayjs": "^1.11.3",
     "framer-motion": "^6.3.11",
     "react": "^18.0.0",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
