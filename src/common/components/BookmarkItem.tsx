@@ -19,7 +19,7 @@ const styles = {
 interface BookmarkItemProps {
   title: string;
   uri: string;
-  createdAt: Date;
+  createdAt: string;
 }
 
 const BookmarkItem = ({ title, uri, createdAt }: BookmarkItemProps) => {
@@ -27,7 +27,7 @@ const BookmarkItem = ({ title, uri, createdAt }: BookmarkItemProps) => {
   return (
     <a css={styles.wrapper(theme)} target="_blank" rel="noreferrer" href={uri}>
       <span>{title}</span>
-      <span>{createdAt.toLocaleDateString()}</span>
+      <span>{createdAt}</span>
     </a>
   );
 };

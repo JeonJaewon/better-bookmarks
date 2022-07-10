@@ -6,10 +6,26 @@ import { useFilter } from '../contexts/FilterContext';
 import BookmarkItem from './BookmarkItem';
 
 const fixture = [
-  { title: '1', uri: 'string', createdAt: dayjs('2022-01-03').toDate() },
-  { title: '2', uri: 'string', createdAt: dayjs('2022-02-04').toDate() },
-  { title: '3', uri: 'string', createdAt: dayjs('2022-05-13').toDate() },
-  { title: '4', uri: 'string', createdAt: dayjs('2022-06-18').toDate() },
+  {
+    title: '1',
+    uri: 'string',
+    createdAt: dayjs('2022-01-03').format('YYYY-MM-DD'),
+  },
+  {
+    title: '2',
+    uri: 'string',
+    createdAt: dayjs('2022-02-04').format('YYYY-MM-DD'),
+  },
+  {
+    title: '3',
+    uri: 'string',
+    createdAt: dayjs('2022-05-13').format('YYYY-MM-DD'),
+  },
+  {
+    title: '4',
+    uri: 'string',
+    createdAt: dayjs('2022-06-18').format('YYYY-MM-DD'),
+  },
 ];
 
 const BookmarkList = () => {
@@ -18,8 +34,7 @@ const BookmarkList = () => {
 
   useEffect(() => {
     const initBookmarks = async () => {
-      const localBookmarks = await getStorageItem(STORAGE_KEYS.bookmarks);
-      setBookmarks(localBookmarks ?? fixture);
+      setBookmarks(fixture);
     };
     initBookmarks();
   }, []);
@@ -43,11 +58,12 @@ const BookmarkList = () => {
         }
       `}
     >
-      {bookmarks.map((bookmark) => (
+      {bookmarks.map((bookmark, index) => (
         <BookmarkItem
           title={bookmark.title}
           uri=""
           createdAt={bookmark.createdAt}
+          key={index}
         />
       ))}
     </div>
