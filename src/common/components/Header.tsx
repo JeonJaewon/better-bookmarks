@@ -1,9 +1,12 @@
 import { css, Theme, useTheme } from '@emotion/react';
+import { TextInput } from '@mantine/core';
+import { useModals } from '@mantine/modals';
+import dayjs from 'dayjs';
+
 import SortIcon from '../../../public/svg/Sort.svg';
 import PlusIcon from '../../../public/svg/Plus.svg';
 import { useFilter, useFilterUpdate } from '../contexts/FilterContext';
 import { setStorageItem, STORAGE_KEYS } from '../../utils/storage';
-import dayjs from 'dayjs';
 
 const styles = {
   wrapper: (theme: Theme) => {
@@ -36,8 +39,18 @@ const Header = () => {
   const theme = useTheme();
   const { dateSortedBy } = useFilter();
   const { setDateSortedBy } = useFilterUpdate();
+  const { openConfirmModal } = useModals();
 
   const onClickPlus = () => {
+    openConfirmModal({
+      title: 'Add Bookmark',
+      centered: true,
+      withCloseButton: false,
+      children: (
+        <TextInput placeholder="Name of the Bookmark" label="" required />
+      ),
+      labels: { confirm: 'Confirm', cancel: 'Cancel' },
+    });
     setStorageItem(STORAGE_KEYS.bookmarks, fixture);
   };
 
