@@ -46,9 +46,7 @@ const Header = () => {
       title: 'Add Bookmark',
       centered: true,
       withCloseButton: false,
-      children: (
-        <TextInput placeholder="Name of the Bookmark" label="" required />
-      ),
+      children: <TextInput placeholder="Name of the Bookmark" required />,
       labels: { confirm: 'Confirm', cancel: 'Cancel' },
     });
     setStorageItem(STORAGE_KEYS.bookmarks, fixture);
