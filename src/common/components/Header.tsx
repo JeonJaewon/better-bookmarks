@@ -1,12 +1,8 @@
 import { css, Theme, useTheme } from '@emotion/react';
-import { TextInput } from '@mantine/core';
-import { useModals } from '@mantine/modals';
-import dayjs from 'dayjs';
-
 import SortIcon from '../../../public/svg/Sort.svg';
 import PlusIcon from '../../../public/svg/Plus.svg';
 import { useFilter, useFilterUpdate } from '../contexts/FilterContext';
-import { setStorageItem, STORAGE_KEYS } from '../../utils/storage';
+import useAddBookmarkModal from '../hooks/useAddBookmarkModal';
 
 const styles = {
   wrapper: (theme: Theme) => {
@@ -28,29 +24,11 @@ const styles = {
   }),
 };
 
-const fixture = [
-  { title: '1', uri: 'string', createdAt: dayjs('2022-01-03').toDate() },
-  { title: '2', uri: 'string', createdAt: dayjs('2022-02-04').toDate() },
-  { title: '3', uri: 'string', createdAt: dayjs('2022-05-13').toDate() },
-  { title: '4', uri: 'string', createdAt: dayjs('2022-06-18').toDate() },
-];
-
 const Header = () => {
   const theme = useTheme();
   const { dateSortedBy } = useFilter();
   const { setDateSortedBy } = useFilterUpdate();
-  const { openConfirmModal } = useModals();
-
-  const onClickPlus = () => {
-    openConfirmModal({
-      title: 'Add Bookmark',
-      centered: true,
-      withCloseButton: false,
-      children: <TextInput placeholder="Name of the Bookmark" required />,
-      labels: { confirm: 'Confirm', cancel: 'Cancel' },
-    });
-    setStorageItem(STORAGE_KEYS.bookmarks, fixture);
-  };
+  const { Modal, setIsOpen } = useAddBookmarkModal();
 
   const onClickSorted = () => {
     if (dateSortedBy === 'newer') {
@@ -62,8 +40,9 @@ const Header = () => {
 
   return (
     <div css={styles.wrapper(theme)}>
-      <div css={styles.plusIcon} onClick={onClickPlus}>
+      <div css={styles.plusIcon} onClick={() => setIsOpen(true)}>
         <PlusIcon />
+        <Modal />
       </div>
       <div css={styles.sortIcon} onClick={onClickSorted}>
         <SortIcon />

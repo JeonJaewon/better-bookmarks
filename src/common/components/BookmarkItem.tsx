@@ -16,16 +16,10 @@ const styles = {
     }),
 };
 
-interface BookmarkItemProps {
-  title: string;
-  uri: string;
-  createdAt: string;
-}
-
-const BookmarkItem = ({ title, uri, createdAt }: BookmarkItemProps) => {
+const BookmarkItem = ({ title, url, createdAt }: BookmarkItemData) => {
   const theme = useTheme();
   return (
-    <a css={styles.wrapper(theme)} target="_blank" rel="noreferrer" href={uri}>
+    <a css={styles.wrapper(theme)} target="_blank" rel="noreferrer" href={url}>
       <span>{title}</span>
       <span>{createdAt}</span>
     </a>
