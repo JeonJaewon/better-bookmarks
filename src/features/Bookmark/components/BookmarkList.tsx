@@ -3,10 +3,16 @@ import { useEffect, useState } from 'react';
 import { getStorageItem, STORAGE_KEYS } from '../../../utils/storage';
 import { useFilter } from '../../../common/contexts/FilterContext';
 import BookmarkItem from './BookmarkItem';
+import {
+  useBookmarkContext,
+  useBookmarkUpdateContext,
+} from '../contexts/BookmarkContext';
+import dayjs from 'dayjs';
 
 const BookmarkList = () => {
   const { dateSortedBy } = useFilter();
-  const [bookmarks, setBookmarks] = useState([]);
+  const { bookmarks } = useBookmarkContext();
+  const { setBookmarks } = useBookmarkUpdateContext();
 
   useEffect(() => {
     const initBookmarks = async () => {
@@ -19,9 +25,17 @@ const BookmarkList = () => {
 
   useEffect(() => {
     if (dateSortedBy === 'newer') {
-      setBookmarks([...bookmarks].sort((a, b) => b.createdAt - a.createdAt));
+      setBookmarks(
+        [...bookmarks].sort(
+          (a, b) => dayjs(b.createdAt).unix() - dayjs(a.createdAt).unix(),
+        ),
+      );
     } else if (dateSortedBy === 'older') {
-      setBookmarks([...bookmarks].sort((a, b) => a.createdAt - b.createdAt));
+      setBookmarks(
+        [...bookmarks].sort(
+          (a, b) => dayjs(a.createdAt).unix() - dayjs(b.createdAt).unix(),
+        ),
+      );
     }
   }, [dateSortedBy]);
 

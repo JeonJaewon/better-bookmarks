@@ -7,6 +7,10 @@ import {
   STORAGE_KEYS,
 } from '../../../utils/storage';
 import { getCurrentTab } from '../../../utils/tabs';
+import {
+  useBookmarkContext,
+  useBookmarkUpdateContext,
+} from '../contexts/BookmarkContext';
 
 interface AddBookmarkModalProps {
   isOpen: boolean;
@@ -15,18 +19,26 @@ interface AddBookmarkModalProps {
 
 const AddBookmarkModal = ({ isOpen, onClose }: AddBookmarkModalProps) => {
   const [title, setTitle] = useState('');
+  const { bookmarks } = useBookmarkContext();
+  const { setBookmarks } = useBookmarkUpdateContext();
 
   const handleOnConfirm = async () => {
-    const currentTab = await getCurrentTab();
-    const currentList = (await getStorageItem(STORAGE_KEYS.bookmarks)) ?? [];
-    setStorageItem(STORAGE_KEYS.bookmarks, [
-      ...currentList,
-      {
-        title,
-        url: currentTab.url,
-        createdAt: dayjs().format('YYYY-MM-DD'),
-      },
-    ]);
+    try {
+      const currentTab = await getCurrentTab();
+      const updatedList = [
+        ...bookmarks,
+        {
+          title,
+          url: currentTab.url,
+          createdAt: dayjs().format('YYYY-MM-DD'),
+        },
+      ];
+      setBookmarks(updatedList);
+      setStorageItem(STORAGE_KEYS.bookmarks, updatedList);
+      onClose();
+    } catch (error) {
+      throw new Error(error.message);
+    }
   };
 
   return (
