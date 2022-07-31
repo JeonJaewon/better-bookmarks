@@ -1,12 +1,9 @@
 import { css } from '@emotion/react';
 import { Button, Modal, TextInput } from '@mantine/core';
+import { closeAllModals, openModal } from '@mantine/modals';
 import dayjs from 'dayjs';
-import { useState } from 'react';
-import {
-  getStorageItem,
-  setStorageItem,
-  STORAGE_KEYS,
-} from '../../../utils/storage';
+import { useEffect, useState } from 'react';
+import { setStorageItem, STORAGE_KEYS } from '../../../utils/storage';
 import { getCurrentTab } from '../../../utils/tabs';
 import {
   useBookmarkContext,
@@ -21,38 +18,46 @@ const styles = {
   }),
 };
 
-interface AddBookmarkModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-const AddBookmarkModal = ({ isOpen, onClose }: AddBookmarkModalProps) => {
+const AddBookmarkModal = () => {
   const [title, setTitle] = useState('');
+  const [currentTab, setCurrentTab] = useState<chrome.tabs.Tab>();
   const { bookmarks } = useBookmarkContext();
   const { setBookmarks } = useBookmarkUpdateContext();
 
+  useEffect(() => {
+    const initCurrentTabData = async () => {
+      const data = await getCurrentTab();
+      setCurrentTab(data);
+    };
+    initCurrentTabData();
+  }, []);
+
+  useEffect(() => {
+    if (currentTab) {
+      setTitle(currentTab.title);
+    }
+  }, [currentTab]);
+
   const handleOnConfirm = async () => {
     try {
-      const currentTab = await getCurrentTab();
-      const updatedList = [
-        ...bookmarks,
-        {
-          title,
-          url: currentTab.url,
-          createdAt: dayjs().format('YYYY-MM-DD'),
-        },
-      ];
+      const newItem = {
+        title,
+        url: currentTab.url,
+        createdAt: dayjs().format('YYYY-MM-DD'),
+      };
+      const updatedList = [...bookmarks, newItem];
       setBookmarks(updatedList);
       setStorageItem(STORAGE_KEYS.bookmarks, updatedList);
-      onClose();
+      closeAllModals();
     } catch (error) {
       throw new Error(error.message);
     }
   };
 
   return (
-    <Modal opened={isOpen} onClose={onClose} title="Add Bookmark" centered>
+    <>
       <TextInput
+        value={title}
         onChange={(event) => setTitle(event.target.value)}
         placeholder="Title of the Bookmark"
         required
@@ -60,17 +65,18 @@ const AddBookmarkModal = ({ isOpen, onClose }: AddBookmarkModalProps) => {
       <Button css={styles.confirmButton} onClick={handleOnConfirm}>
         Add it!
       </Button>
-    </Modal>
+    </>
   );
 };
 
 const useAddBookmarkModal = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const Modal = () => (
-    <AddBookmarkModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
-  );
-
-  return { Modal, setIsOpen };
+  const openAddBookmarkModal = () =>
+    openModal({
+      title: 'Add Bookmark',
+      children: <AddBookmarkModal />,
+      centered: true,
+    });
+  return { openAddBookmarkModal };
 };
 
 export default useAddBookmarkModal;

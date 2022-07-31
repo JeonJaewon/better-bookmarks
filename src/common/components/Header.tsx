@@ -28,7 +28,7 @@ const Header = () => {
   const theme = useTheme();
   const { dateSortedBy } = useFilter();
   const { setDateSortedBy } = useFilterUpdate();
-  const { Modal, setIsOpen } = useAddBookmarkModal();
+  const { openAddBookmarkModal } = useAddBookmarkModal();
 
   const onClickSorted = () => {
     if (dateSortedBy === 'newer') {
@@ -40,9 +40,8 @@ const Header = () => {
 
   return (
     <div css={styles.wrapper(theme)}>
-      <div css={styles.plusIcon} onClick={() => setIsOpen(true)}>
+      <div css={styles.plusIcon} onClick={openAddBookmarkModal}>
         <PlusIcon />
-        <Modal />
       </div>
       <div css={styles.sortIcon} onClick={onClickSorted}>
         <SortIcon />
