@@ -1,8 +1,7 @@
 import { css } from '@emotion/react';
-import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
-import { getStorageItem, STORAGE_KEYS } from '../../utils/storage';
-import { useFilter } from '../contexts/FilterContext';
+import { getStorageItem, STORAGE_KEYS } from '../../../utils/storage';
+import { useFilter } from '../../../common/contexts/FilterContext';
 import BookmarkItem from './BookmarkItem';
 
 const BookmarkList = () => {

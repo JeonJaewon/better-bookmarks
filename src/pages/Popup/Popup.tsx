@@ -1,5 +1,5 @@
 import { css, Theme, useTheme } from '@emotion/react';
-import BookmarkList from '../../common/components/BookmarkList';
+import BookmarkList from '../../features/Bookmark/components/BookmarkList';
 import Header from '../../common/components/Header';
 
 const styles = {

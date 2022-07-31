@@ -5,8 +5,8 @@ import {
   getStorageItem,
   setStorageItem,
   STORAGE_KEYS,
-} from '../../utils/storage';
-import { getCurrentTab } from '../../utils/tabs';
+} from '../../../utils/storage';
+import { getCurrentTab } from '../../../utils/tabs';
 
 interface AddBookmarkModalProps {
   isOpen: boolean;
