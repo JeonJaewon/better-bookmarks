@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import { Button, Modal, TextInput } from '@mantine/core';
 import dayjs from 'dayjs';
 import { useState } from 'react';
@@ -11,6 +12,14 @@ import {
   useBookmarkContext,
   useBookmarkUpdateContext,
 } from '../contexts/BookmarkContext';
+
+const styles = {
+  confirmButton: css({
+    width: '100%',
+    height: 40,
+    marginTop: 20,
+  }),
+};
 
 interface AddBookmarkModalProps {
   isOpen: boolean;
@@ -48,7 +57,9 @@ const AddBookmarkModal = ({ isOpen, onClose }: AddBookmarkModalProps) => {
         placeholder="Title of the Bookmark"
         required
       />
-      <Button onClick={handleOnConfirm}>Add it!</Button>
+      <Button css={styles.confirmButton} onClick={handleOnConfirm}>
+        Add it!
+      </Button>
     </Modal>
   );
 };
