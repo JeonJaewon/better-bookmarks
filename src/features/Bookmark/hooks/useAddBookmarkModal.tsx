@@ -3,12 +3,12 @@ import { Button, Modal, TextInput } from '@mantine/core';
 import { closeAllModals, openModal } from '@mantine/modals';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
-import { setStorageItem, STORAGE_KEYS } from '../../../utils/storage';
-import { getCurrentTab } from '../../../utils/tabs';
+import { setStorageItem, STORAGE_KEYS } from '@src/utils/storage';
+import { getCurrentTab } from '@src/utils/tabs';
 import {
   useBookmarkContext,
   useBookmarkUpdateContext,
-} from '../contexts/BookmarkContext';
+} from '@src/features/Bookmark/contexts/BookmarkContext';
 
 const styles = {
   confirmButton: css({
