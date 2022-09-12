@@ -1,8 +1,8 @@
 import { css, Theme, useTheme } from '@emotion/react';
-import SortIcon from '../../../public/svg/Sort.svg';
-import PlusIcon from '../../../public/svg/Plus.svg';
+import SortIcon from '@public/svg/Sort.svg';
+import PlusIcon from '@public/svg/Plus.svg';
+import useAddBookmarkModal from '@src/features/Bookmark/hooks/useAddBookmarkModal';
 import { useFilter, useFilterUpdate } from '../contexts/FilterContext';
-import useAddBookmarkModal from '../../features/Bookmark/hooks/useAddBookmarkModal';
 
 const styles = {
   wrapper: (theme: Theme) => {

@@ -1,10 +1,10 @@
 import { css, Global, ThemeProvider } from '@emotion/react';
-import { FilterProvider } from '../common/contexts/FilterContext';
-import { resetCSS } from '../styles/globals';
-import { darkTheme } from '../styles/themes';
 import { MantineProvider } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
-import { BookmarkProvider } from '../features/Bookmark/contexts/BookmarkContext';
+import { FilterProvider } from '@src/common/contexts/FilterContext';
+import { resetCSS } from '@src/styles/globals';
+import { darkTheme } from '@src/styles/themes';
+import { BookmarkProvider } from '@src/features/Bookmark/contexts/BookmarkContext';
 
 type AppProviderProps = {
   children: React.ReactNode;

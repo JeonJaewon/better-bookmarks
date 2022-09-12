@@ -5,7 +5,7 @@ import {
   SetStateAction,
   useState,
 } from 'react';
-import { useContextSafely } from '../../../common/hooks/useContextSafely';
+import { useContextSafely } from '@src/common/hooks/useContextSafely';
 
 interface BookmarkContextValue {
   bookmarks: BookmarkItemData[];

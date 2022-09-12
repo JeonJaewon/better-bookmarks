@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
-import { getStorageItem, STORAGE_KEYS } from '../../../utils/storage';
-import { useFilter } from '../../../common/contexts/FilterContext';
+import { getStorageItem, STORAGE_KEYS } from '@src/utils/storage';
+import { useFilter } from '@src/common/contexts/FilterContext';
 import BookmarkItem from './BookmarkItem';
 import {
   useBookmarkContext,
