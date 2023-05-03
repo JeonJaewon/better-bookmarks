@@ -1,4 +1,4 @@
-import { css, Global, ThemeProvider } from '@emotion/react';
+import { Global, ThemeProvider } from '@emotion/react';
 import { MantineProvider } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
 import { FilterProvider } from '@src/common/contexts/FilterContext';
