@@ -5,8 +5,15 @@
   "scripts": {
     "dev": "webpack --watch --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
-    "tsc": "tsc --noemit",
-    "lint": "eslint ./src/**/*.{ts,tsx}"
+    "tsc": "tsc --noEmit",
+    "lint": "eslint ./**/*.{ts,tsx}",
+    "lint-staged": "lint-staged",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint ./**/*.{ts,tsx}"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -45,6 +52,8 @@
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
     "html-webpack-plugin": "^5.5.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.2.2",
     "prettier": "2.6.2",
     "source-map-loader": "^3.0.1",
     "ts-loader": "^9.3.0",
