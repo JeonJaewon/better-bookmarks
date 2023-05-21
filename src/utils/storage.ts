@@ -8,5 +8,6 @@ export const getStorageItem = async (key: string) => {
 };
 
 export const setStorageItem = async (key: string, value: any) => {
-  return await chrome.storage.sync.set({ [key]: value });
+  const result = await chrome.storage.sync.set({ [key]: value });
+  return result;
 };

@@ -30,12 +30,15 @@
         "patterns": ["./*", "../*"]
       }
     ],
-    "no-unused-vars": "warn",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
     "no-use-before-define": "off",
     "import/no-extraneous-dependencies": [
       "error",
       { "devDependencies": ["**/webpack.*"] }
-    ]
+    ],
+    "no-undef": "off",
+    "prefer-const": "warn"
   },
   "settings": {
     "import/resolver": {
