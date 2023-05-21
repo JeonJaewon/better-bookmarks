@@ -1,5 +1,37 @@
 import { css, Theme, useTheme } from '@emotion/react';
+import { BookmarkItemData } from '@src/features/Bookmark/types';
 import { motion } from 'framer-motion';
+
+type BookmarkItemProps = BookmarkItemData & {
+  onDrag: (e: PointerEvent) => void;
+};
+
+export const BookmarkItem = ({
+  title,
+  url,
+  createdAt,
+  onDrag,
+}: BookmarkItemProps) => {
+  const theme = useTheme();
+
+  return (
+    <div key={url}>
+      <motion.a
+        layout
+        drag
+        dragSnapToOrigin
+        onDrag={onDrag}
+        css={styles.wrapper(theme)}
+        target="_blank"
+        rel="noreferrer"
+        href={url}
+      >
+        <span css={styles.title}>{title}</span>
+        <span css={styles.createdAt}>{createdAt}</span>
+      </motion.a>
+    </div>
+  );
+};
 
 const styles = {
   wrapper: (theme: Theme) =>
@@ -25,31 +57,3 @@ const styles = {
     display: 'inline-block',
   }),
 };
-
-type BookmarkItemProps = BookmarkItemData & {
-  onDrag: (e: PointerEvent) => void;
-};
-
-const BookmarkItem = ({ title, url, createdAt, onDrag }: BookmarkItemProps) => {
-  const theme = useTheme();
-
-  return (
-    <div key={url}>
-      <motion.a
-        layout
-        drag
-        dragSnapToOrigin
-        onDrag={onDrag}
-        css={styles.wrapper(theme)}
-        target="_blank"
-        rel="noreferrer"
-        href={url}
-      >
-        <span css={styles.title}>{title}</span>
-        <span css={styles.createdAt}>{createdAt}</span>
-      </motion.a>
-    </div>
-  );
-};
-
-export default BookmarkItem;

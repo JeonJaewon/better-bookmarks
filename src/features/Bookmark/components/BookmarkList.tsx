@@ -1,15 +1,15 @@
 import { css } from '@emotion/react';
 import { useEffect } from 'react';
+import dayjs from 'dayjs';
 import { getStorageItem, STORAGE_KEYS } from '@src/utils/storage';
 import { useFilter } from '@src/common/contexts/FilterContext';
-import BookmarkItem from './BookmarkItem';
+import { BookmarkItem } from '@src/features/Bookmark/components/BookmarkItem';
 import {
   useBookmarkContext,
   useBookmarkUpdateContext,
-} from '../contexts/BookmarkContext';
-import dayjs from 'dayjs';
+} from '@src/features/Bookmark/contexts/BookmarkContext';
 
-const BookmarkList = () => {
+export const BookmarkList = () => {
   const { dateSortedBy } = useFilter();
   const { bookmarks } = useBookmarkContext();
   const { setBookmarks } = useBookmarkUpdateContext();
@@ -80,5 +80,3 @@ const BookmarkList = () => {
     </div>
   );
 };
-
-export default BookmarkList;
