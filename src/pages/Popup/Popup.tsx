@@ -13,7 +13,7 @@ const styles = {
     }),
 };
 
-const Popup = () => {
+export const Popup = () => {
   const theme = useTheme();
   return (
     <div css={styles.wrapper(theme)}>
@@ -22,5 +22,3 @@ const Popup = () => {
     </div>
   );
 };
-
-export default Popup;

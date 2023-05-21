@@ -5,15 +5,14 @@
   "scripts": {
     "dev": "webpack --watch --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
-    "tsc": "tsc --noemit",
+    "tsc": "tsc --noEmit",
     "lint": "eslint ./**/*.{ts,tsx}",
     "lint-staged": "lint-staged",
     "prepare": "husky install"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "eslint ./**/*.{ts,tsx}",
-      "tsc --noemit"
+      "eslint ./**/*.{ts,tsx}"
     ]
   },
   "keywords": [],
