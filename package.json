@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "webpack --watch --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
-    "lint": "eslint ."
+    "tsc": "tsc --noemit",
+    "lint": "eslint ./src/**/*.{ts,tsx}"
   },
   "keywords": [],
   "author": "",

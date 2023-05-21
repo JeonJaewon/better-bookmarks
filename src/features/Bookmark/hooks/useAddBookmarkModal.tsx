@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Button, Modal, TextInput } from '@mantine/core';
+import { Button, TextInput } from '@mantine/core';
 import { closeAllModals, openModal } from '@mantine/modals';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
@@ -9,14 +9,6 @@ import {
   useBookmarkContext,
   useBookmarkUpdateContext,
 } from '@src/features/Bookmark/contexts/BookmarkContext';
-
-const styles = {
-  confirmButton: css({
-    width: '100%',
-    height: 40,
-    marginTop: 20,
-  }),
-};
 
 const AddBookmarkModal = () => {
   const [title, setTitle] = useState('');
@@ -69,7 +61,7 @@ const AddBookmarkModal = () => {
   );
 };
 
-const useAddBookmarkModal = () => {
+export const useAddBookmarkModal = () => {
   const openAddBookmarkModal = () =>
     openModal({
       title: 'Add Bookmark',
@@ -79,4 +71,10 @@ const useAddBookmarkModal = () => {
   return { openAddBookmarkModal };
 };
 
-export default useAddBookmarkModal;
+const styles = {
+  confirmButton: css({
+    width: '100%',
+    height: 40,
+    marginTop: 20,
+  }),
+};

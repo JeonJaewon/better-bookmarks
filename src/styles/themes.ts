@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import { Theme } from '@emotion/react';
 
 declare module '@emotion/react' {
