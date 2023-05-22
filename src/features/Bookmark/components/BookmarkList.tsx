@@ -4,15 +4,12 @@ import dayjs from 'dayjs';
 import { getStorageItem, STORAGE_KEYS } from '@src/utils/storage';
 import { useFilter } from '@src/common/contexts/FilterContext';
 import { BookmarkItem } from '@src/features/Bookmark/components/BookmarkItem';
-import {
-  useBookmarkContext,
-  useBookmarkUpdateContext,
-} from '@src/features/Bookmark/contexts/BookmarkContext';
+import { useAtom } from 'jotai';
+import { bookmarksAtom } from '@src/features/Bookmark/atoms';
 
 export const BookmarkList = () => {
   const { dateSortedBy } = useFilter();
-  const { bookmarks } = useBookmarkContext();
-  const { setBookmarks } = useBookmarkUpdateContext();
+  const [bookmarks, setBookmarks] = useAtom(bookmarksAtom);
 
   const swapBookmark = (a: number, b: number) => {
     const result = [...bookmarks];
