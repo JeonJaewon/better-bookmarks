@@ -2,16 +2,13 @@ import { css, Theme, useTheme } from '@emotion/react';
 import { BookmarkItemData } from '@src/features/Bookmark/types';
 import { motion } from 'framer-motion';
 
-type BookmarkItemProps = BookmarkItemData & {
+type BookmarkItemProps = {
+  item: BookmarkItemData;
   onDrag: (e: PointerEvent) => void;
 };
 
-export const BookmarkItem = ({
-  title,
-  url,
-  createdAt,
-  onDrag,
-}: BookmarkItemProps) => {
+export const BookmarkItem = ({ item, onDrag }: BookmarkItemProps) => {
+  const { title, url, createdAt } = item;
   const theme = useTheme();
 
   return (

@@ -5,16 +5,13 @@ import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { setStorageItem, STORAGE_KEYS } from '@src/utils/storage';
 import { getCurrentTab } from '@src/utils/tabs';
-import {
-  useBookmarkContext,
-  useBookmarkUpdateContext,
-} from '@src/features/Bookmark/contexts/BookmarkContext';
+import { useAtom } from 'jotai';
+import { bookmarksAtom } from '@src/features/Bookmark/atoms';
 
 const AddBookmarkModal = () => {
   const [title, setTitle] = useState('');
   const [currentTab, setCurrentTab] = useState<chrome.tabs.Tab>();
-  const { bookmarks } = useBookmarkContext();
-  const { setBookmarks } = useBookmarkUpdateContext();
+  const [bookmarks, setBookmarks] = useAtom(bookmarksAtom);
 
   useEffect(() => {
     const initCurrentTabData = async () => {

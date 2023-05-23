@@ -2,81 +2,82 @@ import { css } from '@emotion/react';
 import { useEffect } from 'react';
 import dayjs from 'dayjs';
 import { getStorageItem, STORAGE_KEYS } from '@src/utils/storage';
-import { useFilter } from '@src/common/contexts/FilterContext';
 import { BookmarkItem } from '@src/features/Bookmark/components/BookmarkItem';
-import {
-  useBookmarkContext,
-  useBookmarkUpdateContext,
-} from '@src/features/Bookmark/contexts/BookmarkContext';
+import { useAtom, useSetAtom } from 'jotai';
+import { bookmarksAtom, swapBookmarkAtom } from '@src/features/Bookmark/atoms';
+import { dateSortingOptionAtom } from '@src/features/Filter/atoms';
 
 export const BookmarkList = () => {
-  const { dateSortedBy } = useFilter();
-  const { bookmarks } = useBookmarkContext();
-  const { setBookmarks } = useBookmarkUpdateContext();
-
-  const swapBookmark = (a: number, b: number) => {
-    const result = [...bookmarks];
-    [result[a], result[b]] = [result[b], result[a]];
-    setBookmarks(result);
-  };
+  const [dateSortingOption] = useAtom(dateSortingOptionAtom);
+  const [bookmarks, setBookmarks] = useAtom(bookmarksAtom);
+  const swapBookmark = useSetAtom(swapBookmarkAtom);
 
   useEffect(() => {
     const initBookmarks = async () => {
       // chrome.storage.sync.clear();
-      const currentList = await getStorageItem(STORAGE_KEYS.bookmarks);
-      setBookmarks(currentList ?? []);
+      const currentList = (await getStorageItem(STORAGE_KEYS.bookmarks)) ?? [];
+      setBookmarks(currentList);
     };
+
     initBookmarks();
   }, []);
 
   useEffect(() => {
-    if (dateSortedBy === 'newer') {
+    if (dateSortingOption === 'newer') {
       setBookmarks(
         [...bookmarks].sort(
           (a, b) => dayjs(b.createdAt).unix() - dayjs(a.createdAt).unix(),
         ),
       );
-    } else if (dateSortedBy === 'older') {
+      return;
+    }
+
+    if (dateSortingOption === 'older') {
       setBookmarks(
         [...bookmarks].sort(
           (a, b) => dayjs(a.createdAt).unix() - dayjs(b.createdAt).unix(),
         ),
       );
     }
-  }, [dateSortedBy]);
+  }, [dateSortingOption]);
 
-  const onDrag = (index: number) => (e: PointerEvent) => {
-    const ITEM_HEIGHT = 70;
-    if (e.y > (index + 1) * ITEM_HEIGHT * 2) {
-      if (index + 1 >= bookmarks.length) {
-        return;
-      }
-      swapBookmark(index, index + 1);
+  const onDrag = (currentItemIndex: number) => (event: PointerEvent) => {
+    const nextItemIndex = currentItemIndex + 1;
+
+    if (nextItemIndex >= bookmarks.length) {
+      return;
+    }
+
+    const ITEM_HEIGHT_FOR_SWAP = 140;
+    const swapThreshold = nextItemIndex * ITEM_HEIGHT_FOR_SWAP;
+
+    if (event.y > swapThreshold) {
+      swapBookmark({ x: currentItemIndex, y: nextItemIndex });
     }
   };
 
   return (
-    <div
-      css={css`
-        overflow: scroll;
-        padding: 24px;
-        height: 400px;
-        &::-webkit-scrollbar {
-          display: none;
-        }
-      `}
-    >
+    <div css={styles.wrapper}>
       <ol>
-        {bookmarks.map((bookmark, index) => (
+        {bookmarks.map((item, index) => (
           <BookmarkItem
-            title={bookmark.title}
-            url={bookmark.url}
-            createdAt={bookmark.createdAt}
-            key={bookmark.title}
+            key={`${item.url}-${item.createdAt}`}
+            item={item}
             onDrag={onDrag(index)}
           />
         ))}
       </ol>
     </div>
   );
+};
+
+const styles = {
+  wrapper: css`
+    overflow: scroll;
+    padding: 24px;
+    height: 400px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  `,
 };
