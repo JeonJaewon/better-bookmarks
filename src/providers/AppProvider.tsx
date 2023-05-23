@@ -1,7 +1,6 @@
 import { Global, ThemeProvider } from '@emotion/react';
 import { MantineProvider } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
-import { FilterProvider } from '@src/common/contexts/FilterContext';
 import { resetCSS } from '@src/styles/globals';
 import { darkTheme } from '@src/styles/themes';
 
@@ -14,9 +13,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     <ThemeProvider theme={darkTheme}>
       <MantineProvider theme={{ colorScheme: 'dark' }}>
         <Global styles={resetCSS} />
-        <ModalsProvider>
-          <FilterProvider>{children}</FilterProvider>
-        </ModalsProvider>
+        <ModalsProvider>{children}</ModalsProvider>
       </MantineProvider>
     </ThemeProvider>
   );

@@ -2,7 +2,8 @@ import { css, Theme, useTheme } from '@emotion/react';
 import SortIcon from '@public/svg/Sort.svg';
 import PlusIcon from '@public/svg/Plus.svg';
 import { useAddBookmarkModal } from '@src/features/Bookmark/hooks/useAddBookmarkModal';
-import { useFilter, useFilterUpdate } from '@src/common/contexts/FilterContext';
+import { dateSortingOptionAtom } from '@src/features/Filter/atoms';
+import { useAtom } from 'jotai';
 
 const styles = {
   wrapper: (theme: Theme) => {
@@ -26,15 +27,16 @@ const styles = {
 
 const Header = () => {
   const theme = useTheme();
-  const { dateSortedBy } = useFilter();
-  const { setDateSortedBy } = useFilterUpdate();
+  const [dateSortingOption, setDateSortingOption] = useAtom(
+    dateSortingOptionAtom,
+  );
   const { openAddBookmarkModal } = useAddBookmarkModal();
 
   const onClickSorted = () => {
-    if (dateSortedBy === 'newer') {
-      setDateSortedBy('older');
+    if (dateSortingOption === 'newer') {
+      setDateSortingOption('older');
     } else {
-      setDateSortedBy('newer');
+      setDateSortingOption('newer');
     }
   };
 

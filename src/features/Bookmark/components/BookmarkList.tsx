@@ -2,13 +2,13 @@ import { css } from '@emotion/react';
 import { useEffect } from 'react';
 import dayjs from 'dayjs';
 import { getStorageItem, STORAGE_KEYS } from '@src/utils/storage';
-import { useFilter } from '@src/common/contexts/FilterContext';
 import { BookmarkItem } from '@src/features/Bookmark/components/BookmarkItem';
 import { useAtom, useSetAtom } from 'jotai';
 import { bookmarksAtom, swapBookmarkAtom } from '@src/features/Bookmark/atoms';
+import { dateSortingOptionAtom } from '@src/features/Filter/atoms';
 
 export const BookmarkList = () => {
-  const { dateSortedBy } = useFilter();
+  const [dateSortingOption] = useAtom(dateSortingOptionAtom);
   const [bookmarks, setBookmarks] = useAtom(bookmarksAtom);
   const swapBookmark = useSetAtom(swapBookmarkAtom);
 
@@ -23,7 +23,7 @@ export const BookmarkList = () => {
   }, []);
 
   useEffect(() => {
-    if (dateSortedBy === 'newer') {
+    if (dateSortingOption === 'newer') {
       setBookmarks(
         [...bookmarks].sort(
           (a, b) => dayjs(b.createdAt).unix() - dayjs(a.createdAt).unix(),
@@ -32,14 +32,14 @@ export const BookmarkList = () => {
       return;
     }
 
-    if (dateSortedBy === 'older') {
+    if (dateSortingOption === 'older') {
       setBookmarks(
         [...bookmarks].sort(
           (a, b) => dayjs(a.createdAt).unix() - dayjs(b.createdAt).unix(),
         ),
       );
     }
-  }, [dateSortedBy]);
+  }, [dateSortingOption]);
 
   const onDrag = (currentItemIndex: number) => (event: PointerEvent) => {
     const nextItemIndex = currentItemIndex + 1;
