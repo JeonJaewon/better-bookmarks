@@ -43,16 +43,23 @@ export const BookmarkList = () => {
 
   const onDrag = (currentItemIndex: number) => (event: PointerEvent) => {
     const nextItemIndex = currentItemIndex + 1;
+    const swapWithNextThreshold = nextItemIndex * 140;
 
-    if (nextItemIndex >= bookmarks.length) {
+    if (event.y > swapWithNextThreshold) {
+      if (nextItemIndex >= bookmarks.length) {
+        return;
+      }
+      swapBookmark({ x: currentItemIndex, y: nextItemIndex });
       return;
     }
 
-    const ITEM_HEIGHT_FOR_SWAP = 140;
-    const swapThreshold = nextItemIndex * ITEM_HEIGHT_FOR_SWAP;
-
-    if (event.y > swapThreshold) {
-      swapBookmark({ x: currentItemIndex, y: nextItemIndex });
+    const previousItemIndex = currentItemIndex - 1;
+    const swapWithPreviousThreshold = nextItemIndex * 70;
+    if (event.y < swapWithPreviousThreshold) {
+      if (previousItemIndex < 0) {
+        return;
+      }
+      swapBookmark({ x: currentItemIndex, y: previousItemIndex });
     }
   };
 

@@ -18,6 +18,10 @@ export const BookmarkItem = ({ item, onDrag }: BookmarkItemProps) => {
         drag
         dragSnapToOrigin
         onDrag={onDrag}
+        onDragEnd={(e) => {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+        }}
         css={styles.wrapper(theme)}
         target="_blank"
         rel="noreferrer"
