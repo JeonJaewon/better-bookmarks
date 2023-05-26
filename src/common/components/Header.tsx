@@ -1,5 +1,4 @@
 import { css, Theme, useTheme } from '@emotion/react';
-import PlusIcon from '@public/svg/Plus.svg';
 import { useAddBookmarkModal } from '@src/features/Bookmark/hooks/useAddBookmarkModal';
 import {
   DateSortingOption,
@@ -7,10 +6,11 @@ import {
 } from '@src/features/Filter/atoms';
 import { useAtom } from 'jotai';
 import { Select } from '@mantine/core';
+import { Plus } from 'react-feather';
 
 const FILTER_OPTIONS: { value: DateSortingOption; label: string }[] = [
-  { value: 'older', label: 'Date Added - Ascending' },
-  { value: 'newer', label: 'Date Added - Descending' },
+  { value: 'older', label: 'Date - Ascending' },
+  { value: 'newer', label: 'Date - Descending' },
 ];
 
 export const Header = () => {
@@ -26,10 +26,15 @@ export const Header = () => {
 
   return (
     <div css={styles.wrapper(theme)}>
-      <div css={styles.plusIcon} onClick={openAddBookmarkModal}>
-        <PlusIcon />
-      </div>
-      <div css={styles.sortIcon}>
+      <button
+        type="button"
+        css={styles.addButton}
+        onClick={openAddBookmarkModal}
+      >
+        <Plus color="#FFFFFF" size="18" />
+        <span>Add</span>
+      </button>
+      <div css={styles.sortSelect}>
         <Select
           placeholder="Sort By"
           value={dateSortingOption}
@@ -52,11 +57,22 @@ const styles = {
       padding: '0 16px',
     });
   },
-  plusIcon: css({
+  addButton: css({
     cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    color: 'white',
+    border: '1px solid white',
+    borderRadius: '4px',
+    backgroundColor: '#25262b',
+    padding: '6px 16px 6px 8px',
+    gap: '4px',
   }),
-  sortIcon: css({
-    cursor: 'pointer',
-    '&:hover': {},
+  sortSelect: css({
+    borderRadius: '4px',
+    width: '180px',
+    '& input::placeholder': {
+      color: 'white',
+    },
   }),
 };
