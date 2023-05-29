@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { setStorageItem, STORAGE_KEYS } from '@src/utils/storage';
 import { getCurrentTab } from '@src/utils/tabs';
 import { useAtom } from 'jotai';
-import { bookmarksAtom } from '@src/features/Bookmark/atoms';
+import { bookmarksAtom } from '@src/Bookmark/atoms';
 
 const AddBookmarkModal = () => {
   const [title, setTitle] = useState('');

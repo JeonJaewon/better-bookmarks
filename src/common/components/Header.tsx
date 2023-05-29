@@ -1,12 +1,10 @@
 import { css, Theme, useTheme } from '@emotion/react';
-import { useAddBookmarkModal } from '@src/features/Bookmark/hooks/useAddBookmarkModal';
-import {
-  DateSortingOption,
-  dateSortingOptionAtom,
-} from '@src/features/Filter/atoms';
-import { useAtom } from 'jotai';
+import { useAddBookmarkModal } from '@src/Bookmark/hooks/useAddBookmarkModal';
+import { DateSortingOption, dateSortingOptionAtom } from '@src/Filter/atoms';
+import { useAtom, useAtomValue } from 'jotai';
 import { Select } from '@mantine/core';
 import { Plus } from 'react-feather';
+import { headerHeightAtom } from '@src/UI/atoms';
 
 const FILTER_OPTIONS: { value: DateSortingOption; label: string }[] = [
   { value: 'older', label: 'Date - Ascending' },
@@ -19,13 +17,14 @@ export const Header = () => {
   const [dateSortingOption, setDateSortingOption] = useAtom(
     dateSortingOptionAtom,
   );
+  const headerHeight = useAtomValue(headerHeightAtom);
 
   const handleChageSortOption = (value: DateSortingOption) => {
     setDateSortingOption(value);
   };
 
   return (
-    <div css={styles.wrapper(theme)}>
+    <div css={styles.wrapper(theme, headerHeight)}>
       <button
         type="button"
         css={styles.addButton}
@@ -47,14 +46,14 @@ export const Header = () => {
 };
 
 const styles = {
-  wrapper: (theme: Theme) => {
+  wrapper: (theme: Theme, height: number) => {
     return css({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
       backgroundColor: theme.secondaryBackground,
-      height: 60,
       padding: '0 16px',
+      height,
     });
   },
   addButton: css({

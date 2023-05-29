@@ -1,6 +1,11 @@
 import { css, Theme, useTheme } from '@emotion/react';
-import { BookmarkItemData } from '@src/features/Bookmark/types';
+import { BookmarkItemData } from '@src/Bookmark/types';
+import {
+  bookmarkItemHeightAtom,
+  bookmarkItemMarginBottomAtom,
+} from '@src/UI/atoms';
 import { motion } from 'framer-motion';
+import { useAtomValue } from 'jotai';
 
 type BookmarkItemProps = {
   item: BookmarkItemData;
@@ -10,6 +15,8 @@ type BookmarkItemProps = {
 export const BookmarkItem = ({ item, onDrag }: BookmarkItemProps) => {
   const { title, url } = item;
   const theme = useTheme();
+  const bookmarkItemHeight = useAtomValue(bookmarkItemHeightAtom);
+  const bookmarkItemMarginBottom = useAtomValue(bookmarkItemMarginBottomAtom);
 
   return (
     <div key={url}>
@@ -22,7 +29,11 @@ export const BookmarkItem = ({ item, onDrag }: BookmarkItemProps) => {
           e.preventDefault();
           e.stopImmediatePropagation();
         }}
-        css={styles.wrapper(theme)}
+        css={styles.wrapper(
+          theme,
+          bookmarkItemHeight,
+          bookmarkItemMarginBottom,
+        )}
         target="_blank"
         rel="noreferrer"
         href={url}
@@ -34,7 +45,7 @@ export const BookmarkItem = ({ item, onDrag }: BookmarkItemProps) => {
 };
 
 const styles = {
-  wrapper: (theme: Theme) =>
+  wrapper: (theme: Theme, height: number, marginBottom: number) =>
     css({
       width: '100%',
       color: '#ffffff',
@@ -45,7 +56,8 @@ const styles = {
       whiteSpace: 'nowrap',
       overflow: 'hidden',
       display: 'inline-block',
-      marginBottom: 14,
+      height,
+      marginBottom,
     }),
   title: css({
     fontSize: '14px',
