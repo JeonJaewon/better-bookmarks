@@ -8,7 +8,7 @@ type BookmarkItemProps = {
 };
 
 export const BookmarkItem = ({ item, onDrag }: BookmarkItemProps) => {
-  const { title, url, createdAt } = item;
+  const { title, url } = item;
   const theme = useTheme();
 
   return (
@@ -28,7 +28,6 @@ export const BookmarkItem = ({ item, onDrag }: BookmarkItemProps) => {
         href={url}
       >
         <span css={styles.title}>{title}</span>
-        <span css={styles.createdAt}>{createdAt}</span>
       </motion.a>
     </div>
   );
@@ -38,23 +37,17 @@ const styles = {
   wrapper: (theme: Theme) =>
     css({
       width: '100%',
-      display: 'flex',
-      alignItems: 'center',
-      cursor: 'pointer',
       color: '#ffffff',
-      justifyContent: 'space-between',
-      padding: '0 12px',
+      padding: '14px 12px',
       backgroundColor: theme.item.backgroundColor,
-      height: 50,
-      marginBottom: 24,
-      borderRadius: 10,
+      borderRadius: 4,
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      display: 'inline-block',
+      marginBottom: 14,
     }),
   title: css({
     fontSize: '14px',
-    fontWeight: 'bold',
-  }),
-  createdAt: css({
-    width: '100px',
-    display: 'inline-block',
   }),
 };
