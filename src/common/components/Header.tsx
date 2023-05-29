@@ -32,7 +32,7 @@ export const Header = () => {
         onClick={openAddBookmarkModal}
       >
         <Plus color="#FFFFFF" size="18" />
-        <span>Add</span>
+        <span>Add Bookmark</span>
       </button>
       <div css={styles.sortSelect}>
         <Select
