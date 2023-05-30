@@ -6,6 +6,7 @@ import {
 } from '@src/UI/atoms';
 import { motion } from 'framer-motion';
 import { useAtomValue } from 'jotai';
+import { useRef } from 'react';
 
 type BookmarkItemProps = {
   item: BookmarkItemData;
@@ -17,29 +18,43 @@ export const BookmarkItem = ({ item, onDrag }: BookmarkItemProps) => {
   const theme = useTheme();
   const bookmarkItemHeight = useAtomValue(bookmarkItemHeightAtom);
   const bookmarkItemMarginBottom = useAtomValue(bookmarkItemMarginBottomAtom);
+  const isDragging = useRef(false);
+
+  const handleClickItem = () => {
+    if (isDragging.current) {
+      return;
+    }
+    window.open(url);
+  };
+
+  const handleDragStart = () => {
+    isDragging.current = true;
+  };
+
+  const handleDragEnd = () => {
+    setTimeout(() => {
+      isDragging.current = false;
+    }, 0);
+  };
 
   return (
     <div key={url}>
-      <motion.a
+      <motion.div
         layout
         drag
         dragSnapToOrigin
+        onClick={handleClickItem}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
         onDrag={onDrag}
-        onDragEnd={(e) => {
-          e.preventDefault();
-          e.stopImmediatePropagation();
-        }}
         css={styles.wrapper(
           theme,
           bookmarkItemHeight,
           bookmarkItemMarginBottom,
         )}
-        target="_blank"
-        rel="noreferrer"
-        href={url}
       >
         <span css={styles.title}>{title}</span>
-      </motion.a>
+      </motion.div>
     </div>
   );
 };
@@ -47,6 +62,7 @@ export const BookmarkItem = ({ item, onDrag }: BookmarkItemProps) => {
 const styles = {
   wrapper: (theme: Theme, height: number, marginBottom: number) =>
     css({
+      cursor: 'pointer',
       width: '100%',
       color: '#ffffff',
       padding: '14px 12px',
