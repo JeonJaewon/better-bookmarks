@@ -1,4 +1,6 @@
 import { css, Theme, useTheme } from '@emotion/react';
+import { openModal } from '@mantine/modals';
+import { ManageBookmarkModal } from '@src/Bookmark/components/ManageBookmarkModal';
 import { BookmarkItemData } from '@src/Bookmark/types';
 import {
   bookmarkItemHeightAtom,
@@ -6,7 +8,8 @@ import {
 } from '@src/UI/atoms';
 import { motion } from 'framer-motion';
 import { useAtomValue } from 'jotai';
-import { useRef } from 'react';
+import { MouseEvent, useRef } from 'react';
+import { MoreHorizontal } from 'react-feather';
 
 type BookmarkItemProps = {
   item: BookmarkItemData;
@@ -37,6 +40,15 @@ export const BookmarkItem = ({ item, onDrag }: BookmarkItemProps) => {
     }, 0);
   };
 
+  const openManageBookmarkModal = (event: MouseEvent) => {
+    openModal({
+      title: 'Manage Bookmark',
+      children: <ManageBookmarkModal url={url} />,
+      centered: true,
+    });
+    event.stopPropagation();
+  };
+
   return (
     <div key={url}>
       <motion.div
@@ -54,6 +66,7 @@ export const BookmarkItem = ({ item, onDrag }: BookmarkItemProps) => {
         )}
       >
         <span css={styles.title}>{title}</span>
+        <MoreHorizontal size="18" onClick={openManageBookmarkModal} />
       </motion.div>
     </div>
   );
@@ -71,11 +84,15 @@ const styles = {
       textOverflow: 'ellipsis',
       whiteSpace: 'nowrap',
       overflow: 'hidden',
-      display: 'inline-block',
+      display: 'inline-flex',
+      justifyContent: 'space-between',
       height,
       marginBottom,
     }),
   title: css({
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    maxWidth: '88%',
     fontSize: '14px',
   }),
 };

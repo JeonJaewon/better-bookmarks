@@ -19,7 +19,7 @@ export const BookmarkList = () => {
   useEffect(() => {
     const initBookmarks = async () => {
       // chrome.storage.sync.clear();
-      const currentList = (await getStorageItem(STORAGE_KEYS.bookmarks)) ?? [];
+      const currentList = (await getStorageItem(STORAGE_KEYS.BOOKMARKS)) ?? [];
       setBookmarks(currentList);
     };
 
