@@ -1,4 +1,5 @@
 import { css, Theme, useTheme } from '@emotion/react';
+import { Button } from '@mantine/core';
 import { openModal } from '@mantine/modals';
 import { ManageBookmarkModal } from '@src/Bookmark/components/ManageBookmarkModal';
 import { BookmarkItemData } from '@src/Bookmark/types';
@@ -66,7 +67,13 @@ export const BookmarkItem = ({ item, onDrag }: BookmarkItemProps) => {
         )}
       >
         <span css={styles.title}>{title}</span>
-        <MoreHorizontal size="18" onClick={openManageBookmarkModal} />
+        <Button
+          onClick={openManageBookmarkModal}
+          css={styles.moreButton}
+          type="button"
+        >
+          <MoreHorizontal size="18" />
+        </Button>
       </motion.div>
     </div>
   );
@@ -78,7 +85,7 @@ const styles = {
       cursor: 'pointer',
       width: '100%',
       color: '#ffffff',
-      padding: '14px 12px',
+      // padding: '14px 12px',
       backgroundColor: theme.item.backgroundColor,
       borderRadius: 4,
       textOverflow: 'ellipsis',
@@ -90,9 +97,21 @@ const styles = {
       marginBottom,
     }),
   title: css({
+    padding: '14px 12px',
+    flex: '1',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     maxWidth: '88%',
     fontSize: '14px',
+  }),
+  moreButton: css({
+    height: '100%',
+    width: '50px',
+    backgroundColor: 'transparent',
+    padding: '0 12px',
+    transition: 'transform 0.2s',
+    '&:hover': {
+      transform: 'scale(1.25)',
+    },
   }),
 };
