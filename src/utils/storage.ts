@@ -1,5 +1,5 @@
 export const STORAGE_KEYS = Object.freeze({
-  bookmarks: 'bookmarks',
+  BOOKMARKS: 'bookmarks',
 });
 
 export const getStorageItem = async (key: string) => {

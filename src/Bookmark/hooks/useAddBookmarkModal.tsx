@@ -36,7 +36,7 @@ const AddBookmarkModal = () => {
       };
       const updatedList = [...bookmarks, newItem];
       setBookmarks(updatedList);
-      setStorageItem(STORAGE_KEYS.bookmarks, updatedList);
+      setStorageItem(STORAGE_KEYS.BOOKMARKS, updatedList);
       closeAllModals();
     } catch (error) {
       throw new Error(error.message);
