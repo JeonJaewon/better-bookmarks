@@ -1,16 +1,13 @@
 import { css } from '@emotion/react';
 import { useEffect } from 'react';
-import dayjs from 'dayjs';
 import { getStorageItem, STORAGE_KEYS } from '@src/utils/storage';
 import { BookmarkItem } from '@src/Bookmark/components/BookmarkItem';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { bookmarksAtom, swapBookmarkAtom } from '@src/Bookmark/atoms';
-import { dateSortingOptionAtom } from '@src/Filter/atoms';
 import { useCalculateSwapThreshold } from '@src/Bookmark/hooks/useCalculateSwapThreshold';
 import { bookmarkListPaddingTopAtom } from '@src/UI/atoms';
 
 export const BookmarkList = () => {
-  const [dateSortingOption] = useAtom(dateSortingOptionAtom);
   const [bookmarks, setBookmarks] = useAtom(bookmarksAtom);
   const swapBookmark = useSetAtom(swapBookmarkAtom);
   const calculateSwapThreshold = useCalculateSwapThreshold();
@@ -25,17 +22,6 @@ export const BookmarkList = () => {
 
     initBookmarks();
   }, []);
-
-  useEffect(() => {
-    if (dateSortingOption === 'newer') {
-      setBookmarks([...bookmarks].sort((a, b) => b.createdAt - a.createdAt));
-      return;
-    }
-
-    if (dateSortingOption === 'older') {
-      setBookmarks([...bookmarks].sort((a, b) => a.createdAt - b.createdAt));
-    }
-  }, [dateSortingOption]);
 
   const onDrag = (currentItemIndex: number) => (event: PointerEvent) => {
     const nextItemIndex = currentItemIndex + 1;
