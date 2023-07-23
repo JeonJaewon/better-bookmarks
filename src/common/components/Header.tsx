@@ -1,10 +1,10 @@
 import { css, Theme, useTheme } from '@emotion/react';
-import { useAddBookmarkModal } from '@src/Bookmark/hooks/useAddBookmarkModal';
 import { DateSortingOption, dateSortingOptionAtom } from '@src/Filter/atoms';
 import { useAtom, useAtomValue } from 'jotai';
 import { Select } from '@mantine/core';
 import { Plus } from 'react-feather';
 import { headerHeightAtom } from '@src/UI/atoms';
+import { openAddBookmarkModal } from '@src/Bookmark/components/AddBookmarkModal/policy';
 
 const FILTER_OPTIONS: { value: DateSortingOption; label: string }[] = [
   { value: 'older', label: 'Date - Ascending' },
@@ -13,7 +13,6 @@ const FILTER_OPTIONS: { value: DateSortingOption; label: string }[] = [
 
 export const Header = () => {
   const theme = useTheme();
-  const { openAddBookmarkModal } = useAddBookmarkModal();
   const [dateSortingOption, setDateSortingOption] = useAtom(
     dateSortingOptionAtom,
   );
