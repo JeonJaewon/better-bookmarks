@@ -37,7 +37,7 @@ export const AddBookmarkModal = () => {
         createdAt: getCurrentMilliseconds(),
       };
       addBookmark(newItem);
-      setStorageItem(STORAGE_KEYS.bookmarks, [...bookmarks, newItem]);
+      setStorageItem(STORAGE_KEYS.BOOKMARKS, [...bookmarks, newItem]);
       closeAllModals();
     } catch (error) {
       throw new Error(error.message);
