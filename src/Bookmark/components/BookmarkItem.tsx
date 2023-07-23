@@ -36,6 +36,8 @@ export const BookmarkItem = ({ item, onDrag }: BookmarkItemProps) => {
   };
 
   const handleDragEnd = () => {
+    // dragEnd시 발생하는 클릭 이벤트가 발생하는 것을 방지하기 위해 setTimeout을 사용한다.
+    // TODO 동작하는 다른 해결책 찾기
     setTimeout(() => {
       isDragging.current = false;
     }, 0);
