@@ -5,13 +5,16 @@ import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { setStorageItem, STORAGE_KEYS } from '@src/utils/storage';
 import { getCurrentTab } from '@src/utils/tabs';
-import { useAtom } from 'jotai';
-import { bookmarksAtom } from '@src/Bookmark/atoms';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { addBookmarkAtom, bookmarksAtom } from '@src/Bookmark/atoms';
+import { BookmarkItemData } from '@src/Bookmark/types';
+import { getCurrentMilliseconds } from '@src/utils/time';
 
 const AddBookmarkModal = () => {
   const [title, setTitle] = useState('');
   const [currentTab, setCurrentTab] = useState<chrome.tabs.Tab>();
-  const [bookmarks, setBookmarks] = useAtom(bookmarksAtom);
+  const bookmarks = useAtomValue(bookmarksAtom);
+  const addBookmark = useSetAtom(addBookmarkAtom);
 
   useEffect(() => {
     const initCurrentTabData = async () => {
@@ -29,14 +32,13 @@ const AddBookmarkModal = () => {
 
   const handleOnConfirm = async () => {
     try {
-      const newItem = {
+      const newItem: BookmarkItemData = {
         title,
         url: currentTab.url,
-        createdAt: dayjs().format('YYYY-MM-DD'),
+        createdAt: getCurrentMilliseconds(),
       };
-      const updatedList = [...bookmarks, newItem];
-      setBookmarks(updatedList);
-      setStorageItem(STORAGE_KEYS.bookmarks, updatedList);
+      addBookmark(newItem);
+      setStorageItem(STORAGE_KEYS.bookmarks, [...bookmarks, newItem]);
       closeAllModals();
     } catch (error) {
       throw new Error(error.message);

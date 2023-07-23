@@ -3,6 +3,14 @@ import { atom } from 'jotai';
 
 export const bookmarksAtom = atom<BookmarkItemData[]>([]);
 
+export const addBookmarkAtom = atom(
+  null,
+  (get, set, bookmark: BookmarkItemData) => {
+    const added: BookmarkItemData[] = [...get(bookmarksAtom), bookmark];
+    set(bookmarksAtom, added);
+  },
+);
+
 export const swapBookmarkAtom = atom(
   null,
   (get, set, update: { x: number; y: number }) => {
