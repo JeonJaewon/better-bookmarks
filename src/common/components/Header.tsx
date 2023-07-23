@@ -18,7 +18,7 @@ export const Header = () => {
   );
   const headerHeight = useAtomValue(headerHeightAtom);
 
-  const handleChageSortOption = (value: DateSortingOption) => {
+  const handleChangeSortOption = (value: DateSortingOption) => {
     setDateSortingOption(value);
   };
 
@@ -36,7 +36,7 @@ export const Header = () => {
         <Select
           placeholder="Sort By"
           value={dateSortingOption}
-          onChange={handleChageSortOption}
+          onChange={handleChangeSortOption}
           data={FILTER_OPTIONS}
         />
       </div>
