@@ -1,7 +1,5 @@
-import { css } from '@emotion/react';
 import { Button, TextInput } from '@mantine/core';
-import { closeAllModals, openModal } from '@mantine/modals';
-import dayjs from 'dayjs';
+import { closeAllModals } from '@mantine/modals';
 import { useEffect, useState } from 'react';
 import { setStorageItem, STORAGE_KEYS } from '@src/utils/storage';
 import { getCurrentTab } from '@src/utils/tabs';
@@ -9,8 +7,9 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { addBookmarkAtom, bookmarksAtom } from '@src/Bookmark/atoms';
 import { BookmarkItemData } from '@src/Bookmark/types';
 import { getCurrentMilliseconds } from '@src/utils/time';
+import { css } from '@emotion/react';
 
-const AddBookmarkModal = () => {
+export const AddBookmarkModal = () => {
   const [title, setTitle] = useState('');
   const [currentTab, setCurrentTab] = useState<chrome.tabs.Tab>();
   const bookmarks = useAtomValue(bookmarksAtom);
@@ -58,16 +57,6 @@ const AddBookmarkModal = () => {
       </Button>
     </>
   );
-};
-
-export const useAddBookmarkModal = () => {
-  const openAddBookmarkModal = () =>
-    openModal({
-      title: 'Add Bookmark',
-      children: <AddBookmarkModal />,
-      centered: true,
-    });
-  return { openAddBookmarkModal };
 };
 
 const styles = {
