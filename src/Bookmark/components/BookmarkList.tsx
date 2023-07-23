@@ -28,20 +28,12 @@ export const BookmarkList = () => {
 
   useEffect(() => {
     if (dateSortingOption === 'newer') {
-      setBookmarks(
-        [...bookmarks].sort(
-          (a, b) => dayjs(b.createdAt).unix() - dayjs(a.createdAt).unix(),
-        ),
-      );
+      setBookmarks([...bookmarks].sort((a, b) => b.createdAt - a.createdAt));
       return;
     }
 
     if (dateSortingOption === 'older') {
-      setBookmarks(
-        [...bookmarks].sort(
-          (a, b) => dayjs(a.createdAt).unix() - dayjs(b.createdAt).unix(),
-        ),
-      );
+      setBookmarks([...bookmarks].sort((a, b) => a.createdAt - b.createdAt));
     }
   }, [dateSortingOption]);
 
