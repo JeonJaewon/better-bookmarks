@@ -6,6 +6,7 @@ import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { bookmarksAtom, swapBookmarkAtom } from '@src/Bookmark/atoms';
 import { useCalculateSwapThreshold } from '@src/Bookmark/hooks/useCalculateSwapThreshold';
 import { bookmarkListPaddingTopAtom } from '@src/UI/atoms';
+import { DirectoryItem } from '@src/Directory/components/DirectoryItem';
 
 export const BookmarkList = () => {
   const [bookmarks, setBookmarks] = useAtom(bookmarksAtom);
@@ -29,7 +30,8 @@ export const BookmarkList = () => {
       currentItemIndex,
       'DOWN',
     );
-    if (event.y > swapWithNextThreshold) {
+
+    if (event.clientY > swapWithNextThreshold) {
       if (nextItemIndex >= bookmarks.length) {
         return;
       }
@@ -42,7 +44,7 @@ export const BookmarkList = () => {
       currentItemIndex,
       'UP',
     );
-    if (event.y < swapWithPreviousThreshold) {
+    if (event.clientY < swapWithPreviousThreshold) {
       if (previousItemIndex < 0) {
         return;
       }
@@ -53,6 +55,7 @@ export const BookmarkList = () => {
   return (
     <div css={styles.wrapper(bookmarkListPaddingTop)}>
       <ol>
+        <DirectoryItem />
         {bookmarks.map((item, index) => (
           <BookmarkItem
             key={`${item.url}-${item.createdAt}`}

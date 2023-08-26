@@ -8,9 +8,10 @@ import {
   bookmarkItemMarginBottomAtom,
 } from '@src/UI/atoms';
 import { motion } from 'framer-motion';
-import { useAtomValue } from 'jotai';
-import { MouseEvent, useRef } from 'react';
+import { useAtom, useAtomValue } from 'jotai';
+import { useRef } from 'react';
 import { MoreHorizontal } from 'react-feather';
+import { draggingBookmarkItemAtom } from '@src/Drag/atoms';
 
 type BookmarkItemProps = {
   item: BookmarkItemData;
@@ -22,6 +23,9 @@ export const BookmarkItem = ({ item, onDrag }: BookmarkItemProps) => {
   const theme = useTheme();
   const bookmarkItemHeight = useAtomValue(bookmarkItemHeightAtom);
   const bookmarkItemMarginBottom = useAtomValue(bookmarkItemMarginBottomAtom);
+  const [draggingBookmarkItem, setDraggingBookmarkItem] = useAtom(
+    draggingBookmarkItemAtom,
+  );
   const isDragging = useRef(false);
 
   const handleClickItem = () => {
@@ -33,17 +37,40 @@ export const BookmarkItem = ({ item, onDrag }: BookmarkItemProps) => {
 
   const handleDragStart = () => {
     isDragging.current = true;
+    setDraggingBookmarkItem(item);
   };
 
-  const handleDragEnd = () => {
-    // dragEnd시 발생하는 클릭 이벤트가 발생하는 것을 방지하기 위해 setTimeout을 사용한다.
-    // TODO 동작하는 다른 해결책 찾기
+  const handleDragEnd = (event: MouseEvent) => {
+    // TODO dragEnd시 발생하는 클릭 이벤트가 발생하는 것을 방지하기 위해 setTimeout을 사용한다.
+    // 동작하는 다른 해결책 찾기
     setTimeout(() => {
       isDragging.current = false;
-    }, 0);
+
+      const directories = document.getElementsByClassName('directory');
+      Array.from(directories).some((directory) => {
+        // Calculate the position of the drop target
+        const dropTargetRect = directory.getBoundingClientRect();
+
+        // Calculate the position where the mouse was released
+        const mouseX = event.clientX;
+        const mouseY = event.clientY;
+
+        // Check if the dragged element was released inside the drop target
+        if (
+          mouseX >= dropTargetRect.left &&
+          mouseX <= dropTargetRect.right &&
+          mouseY >= dropTargetRect.top &&
+          mouseY <= dropTargetRect.bottom
+        ) {
+          console.log(draggingBookmarkItem);
+          return true;
+        }
+        return false;
+      });
+    }, 10);
   };
 
-  const openManageBookmarkModal = (event: MouseEvent) => {
+  const openManageBookmarkModal = (event: React.MouseEvent) => {
     openModal({
       title: 'Manage Bookmark',
       children: <ManageBookmarkModal url={url} />,
@@ -53,7 +80,7 @@ export const BookmarkItem = ({ item, onDrag }: BookmarkItemProps) => {
   };
 
   return (
-    <div key={url}>
+    <div key={url} id="bookmark">
       <motion.div
         layout
         drag
