@@ -4,6 +4,7 @@ import { Button } from '@mantine/core';
 import { useSetAtom } from 'jotai';
 import { deleteBookmarkAtom } from '@src/Bookmark/atoms';
 import { closeAllModals } from '@mantine/modals';
+import { Link } from 'react-feather';
 
 interface Props {
   url: BookmarkItemData['url'];
@@ -18,7 +19,11 @@ export const ManageBookmarkModal = ({ url }: Props) => {
 
   return (
     <div css={styles.wrapper}>
-      <span css={styles.urlText}>{url}</span>
+      <div css={styles.urlSection}>
+        <Link color="#FFFFFF" size="18" />
+        <span>{url}</span>
+      </div>
+
       <Button
         onClick={onClickDeleteButton}
         color="red"
@@ -31,12 +36,32 @@ export const ManageBookmarkModal = ({ url }: Props) => {
 };
 
 const styles = {
-  wrapper: css({ padding: '0 4px' }),
-  urlText: css({
-    fontSize: '14px',
-  }),
-  deleteButton: css({
-    width: '100%',
-    marginTop: '16px',
-  }),
+  wrapper: css`
+    padding: 0 4px;
+    color: #fff;
+    width: 100%;
+  `,
+  urlSection: css`
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #333;
+    margin-top: 4px;
+    padding: 12px;
+    color: #fff;
+
+    & span {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  `,
+  deleteButton: css`
+    width: 100%;
+    margin-top: 16px;
+    background-color: #f00;
+    color: #fff;
+  `,
 };
