@@ -5,6 +5,7 @@ import { useSetAtom } from 'jotai';
 import { deleteBookmarkAtom } from '@src/Bookmark/atoms';
 import { closeAllModals } from '@mantine/modals';
 import { Link } from 'react-feather';
+import { showNotification } from '@mantine/notifications';
 
 interface Props {
   url: BookmarkItemData['url'];
@@ -19,7 +20,16 @@ export const ManageBookmarkModal = ({ url }: Props) => {
 
   return (
     <div css={styles.wrapper}>
-      <div css={styles.urlSection}>
+      <div
+        onClick={() => {
+          navigator.clipboard.writeText(url);
+          showNotification({
+            message: 'Copied to clipboard',
+            autoClose: 1000,
+          });
+        }}
+        css={styles.urlSection}
+      >
         <Link color="#FFFFFF" size="18" />
         <span>{url}</span>
       </div>
@@ -43,6 +53,7 @@ const styles = {
   `,
   urlSection: css`
     display: flex;
+    cursor: pointer;
     align-items: center;
     gap: 8px;
     border-radius: 4px;
