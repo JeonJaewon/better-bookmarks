@@ -24,7 +24,7 @@ export const AddBookmarkModal = () => {
   }, []);
 
   useEffect(() => {
-    if (currentTab) {
+    if (currentTab.title !== undefined) {
       setTitle(currentTab.title);
     }
   }, [currentTab]);
