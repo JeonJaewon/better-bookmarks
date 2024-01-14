@@ -3,6 +3,7 @@ import { Button } from '@mantine/core';
 import { openModal } from '@mantine/modals';
 import { ManageBookmarkModal } from '@src/Bookmark/components/ManageBookmarkModal';
 import { BookmarkItemData } from '@src/Bookmark/types';
+import { Colors } from '@src/styles/colors';
 import {
   bookmarkItemHeightAtom,
   bookmarkItemMarginBottomAtom,
@@ -108,9 +109,11 @@ const styles = {
     height: '100%',
     width: '50px',
     backgroundColor: 'transparent',
+    borderRadius: '0',
     padding: '0 12px',
     transition: 'transform 0.2s',
     '&:hover': {
+      backgroundColor: Colors.teal[300],
       transform: 'scale(1.25)',
     },
   }),

@@ -6,6 +6,7 @@ import { deleteBookmarkAtom } from '@src/Bookmark/atoms';
 import { closeAllModals } from '@mantine/modals';
 import { Link } from 'react-feather';
 import { showNotification } from '@mantine/notifications';
+import { Colors } from '@src/styles/colors';
 
 interface Props {
   url: BookmarkItemData['url'];
@@ -35,11 +36,7 @@ export const ManageBookmarkModal = ({ url }: Props) => {
           <p>{url}</p>
         </div>
       </div>
-      <Button
-        onClick={onClickDeleteButton}
-        color="red"
-        css={styles.deleteButton}
-      >
+      <Button onClick={onClickDeleteButton} css={styles.deleteButton}>
         Delete this Bookmark
       </Button>
     </div>
@@ -82,7 +79,7 @@ const styles = {
   `,
   deleteButton: css`
     width: 100%;
-    background-color: #f00;
+    background-color: ${Colors.red[400]};
     color: #fff;
   `,
 };
