@@ -18,22 +18,23 @@ export const ManageBookmarkModal = ({ url }: Props) => {
     closeAllModals();
   };
 
+  const handleClickUrlSection = () => {
+    navigator.clipboard.writeText(url);
+    showNotification({
+      message: 'Copied to clipboard',
+      autoClose: 1000,
+    });
+  };
+
   return (
     <div css={styles.wrapper}>
-      <div
-        onClick={() => {
-          navigator.clipboard.writeText(url);
-          showNotification({
-            message: 'Copied to clipboard',
-            autoClose: 1000,
-          });
-        }}
-        css={styles.urlSection}
-      >
-        <Link color="#FFFFFF" size="18" />
-        <span>{url}</span>
+      <div onClick={handleClickUrlSection} css={styles.urlSection}>
+        <p css={styles.urlLabel}>URL</p>
+        <div css={styles.urlValue}>
+          <Link color="#FFFFFF" size="18" />
+          <p>{url}</p>
+        </div>
       </div>
-
       <Button
         onClick={onClickDeleteButton}
         color="red"
@@ -49,21 +50,31 @@ const styles = {
   wrapper: css`
     padding: 0 4px;
     color: #fff;
-    width: 100%;
+    width: 80vw;
   `,
   urlSection: css`
     display: flex;
     cursor: pointer;
     align-items: center;
-    gap: 8px;
-    border-radius: 4px;
+    gap: 10px;
     font-size: 14px;
+    margin: 30px 0;
+  `,
+  urlLabel: css`
+    flex-shrink: 0;
+  `,
+  urlValue: css`
+    display: flex;
+    gap: 6px;
+    border-radius: 4px;
+    padding: 10px;
+    align-items: center;
     background-color: #333;
-    margin-top: 4px;
-    padding: 12px;
     color: #fff;
-
-    & span {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    & p {
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
@@ -71,7 +82,6 @@ const styles = {
   `,
   deleteButton: css`
     width: 100%;
-    margin-top: 16px;
     background-color: #f00;
     color: #fff;
   `,
