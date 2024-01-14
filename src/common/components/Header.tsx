@@ -4,7 +4,8 @@ import { useAtom, useAtomValue } from 'jotai';
 import { Select } from '@mantine/core';
 import { Plus } from 'react-feather';
 import { headerHeightAtom } from '@src/UI/atoms';
-import { openAddBookmarkModal } from '@src/Bookmark/components/AddBookmarkModal/policy';
+import { AddBookmarkModal } from '@src/Bookmark/components/AddBookmarkModal';
+import { openModal } from '@mantine/modals';
 
 const FILTER_OPTIONS: { value: DateSortingOption; label: string }[] = [
   { value: 'older', label: 'Date - Ascending' },
@@ -20,6 +21,14 @@ export const Header = () => {
 
   const handleChangeSortOption = (value: DateSortingOption) => {
     setDateSortingOption(value);
+  };
+
+  const openAddBookmarkModal = () => {
+    openModal({
+      title: 'Add Bookmark',
+      children: <AddBookmarkModal />,
+      centered: true,
+    });
   };
 
   return (
