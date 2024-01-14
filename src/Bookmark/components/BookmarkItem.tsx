@@ -11,7 +11,7 @@ import {
 import { motion } from 'framer-motion';
 import { useAtomValue } from 'jotai';
 import { MouseEvent, useRef } from 'react';
-import { MoreHorizontal } from 'react-feather';
+import { File, MoreHorizontal } from 'react-feather';
 
 type BookmarkItemProps = {
   item: BookmarkItemData;
@@ -67,6 +67,7 @@ export const BookmarkItem = ({ item, onDrag }: BookmarkItemProps) => {
           bookmarkItemMarginBottom,
         )}
       >
+        <File size={16} color="#FFF" />
         <span css={styles.title}>{title}</span>
         <Button
           onClick={openManageBookmarkModal}
@@ -86,13 +87,14 @@ const styles = {
       cursor: 'pointer',
       width: '100%',
       color: '#ffffff',
-      // padding: '14px 12px',
       backgroundColor: theme.item.backgroundColor,
       borderRadius: 4,
       textOverflow: 'ellipsis',
       whiteSpace: 'nowrap',
       overflow: 'hidden',
       display: 'inline-flex',
+      alignItems: 'center',
+      paddingLeft: '12px',
       justifyContent: 'space-between',
       height,
       marginBottom,
