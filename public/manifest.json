@@ -1,7 +1,7 @@
 {
   "name": "BetterBookmarks",
-  "description": "Build an Extension!",
-  "version": "1.0",
+  "description": "Simple, compact app for managing bookmarks gracefully",
+  "version": "0.1",
   "manifest_version": 3,
   "permissions": ["storage", "tabs"],
   "action": {
