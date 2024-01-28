@@ -1,5 +1,4 @@
 import { css, Theme, useTheme } from '@emotion/react';
-import { Button } from '@mantine/core';
 import { openModal } from '@mantine/modals';
 import { ManageBookmarkModal } from '@src/Bookmark/components/ManageBookmarkModal';
 import { BookmarkItemData } from '@src/Bookmark/types';
@@ -9,6 +8,7 @@ import {
   bookmarkItemHeightAtom,
   bookmarkItemMarginBottomAtom,
 } from '@src/UI/atoms';
+import dayjs from 'dayjs';
 import { motion } from 'framer-motion';
 import { useAtomValue } from 'jotai';
 import { MouseEvent, useRef } from 'react';
@@ -25,6 +25,7 @@ export const BookmarkItem = ({ item, onDrag }: BookmarkItemProps) => {
   const bookmarkItemHeight = useAtomValue(bookmarkItemHeightAtom);
   const bookmarkItemMarginBottom = useAtomValue(bookmarkItemMarginBottomAtom);
   const isDragging = useRef(false);
+  const readableCreatedAt = dayjs(item.createdAt).format('YYYY. MM. DD');
 
   const handleClickItem = () => {
     if (isDragging.current) {
@@ -69,14 +70,17 @@ export const BookmarkItem = ({ item, onDrag }: BookmarkItemProps) => {
         )}
       >
         <File size={16} color={darkTheme.grayDark.gray12} />
-        <span css={styles.title}>{title}</span>
-        <Button
+        <div css={styles.contents}>
+          <p css={styles.title}>{title}</p>
+          <p css={styles.createdAt}>{readableCreatedAt}</p>
+        </div>
+        <button
           onClick={openManageBookmarkModal}
           css={styles.moreButton}
           type="button"
         >
-          <MoreHorizontal size="18" />
-        </Button>
+          <MoreHorizontal color={darkTheme.grayDark.gray12} size="14" />
+        </button>
       </motion.div>
     </div>
   );
@@ -88,35 +92,40 @@ const styles = {
       cursor: 'pointer',
       width: '100%',
       color: theme.grayDark.gray12,
-      backgroundColor: theme.grayDark.gray7,
+      backgroundColor: theme.grayDark.gray6,
       borderRadius: 4,
       textOverflow: 'ellipsis',
       whiteSpace: 'nowrap',
       overflow: 'hidden',
       display: 'inline-flex',
       alignItems: 'center',
-      paddingLeft: '12px',
+      padding: '12px 0 12px 12px',
       justifyContent: 'space-between',
-      height,
       marginBottom,
     }),
+  contents: css({
+    width: '80%',
+    textAlign: 'left',
+  }),
   title: css({
-    padding: '14px 12px',
-    flex: '1',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
-    maxWidth: '88%',
+    whiteSpace: 'nowrap',
     fontSize: '14px',
   }),
+  createdAt: css({
+    fontSize: '12px',
+    marginTop: '4px',
+    color: darkTheme.grayDark.gray10,
+    marginRight: '18px',
+  }),
   moreButton: css({
-    height: '100%',
-    width: '50px',
+    cursor: 'pointer',
+    width: '34px',
     backgroundColor: 'transparent',
     borderRadius: '0',
-    padding: '0 12px',
-    transition: 'transform 0.2s',
+    transition: 'transform 0.1s',
     '&:hover': {
-      backgroundColor: Colors.teal[300],
       transform: 'scale(1.25)',
     },
   }),

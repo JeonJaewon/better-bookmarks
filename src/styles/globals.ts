@@ -144,4 +144,8 @@ export const resetCSS = css`
     border-collapse: collapse;
     border-spacing: 0;
   }
+  ,
+  button {
+    border: 0;
+  }
 `;
