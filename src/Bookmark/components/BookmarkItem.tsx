@@ -4,6 +4,7 @@ import { openModal } from '@mantine/modals';
 import { ManageBookmarkModal } from '@src/Bookmark/components/ManageBookmarkModal';
 import { BookmarkItemData } from '@src/Bookmark/types';
 import { Colors } from '@src/styles/colors';
+import { darkTheme } from '@src/styles/themes';
 import {
   bookmarkItemHeightAtom,
   bookmarkItemMarginBottomAtom,
@@ -67,7 +68,7 @@ export const BookmarkItem = ({ item, onDrag }: BookmarkItemProps) => {
           bookmarkItemMarginBottom,
         )}
       >
-        <File size={16} color="#FFF" />
+        <File size={16} color={darkTheme.grayDark.gray12} />
         <span css={styles.title}>{title}</span>
         <Button
           onClick={openManageBookmarkModal}
@@ -86,7 +87,7 @@ const styles = {
     css({
       cursor: 'pointer',
       width: '100%',
-      color: '#ffffff',
+      color: theme.grayDark.gray12,
       backgroundColor: theme.grayDark.gray7,
       borderRadius: 4,
       textOverflow: 'ellipsis',
