@@ -36,7 +36,7 @@ export const Header = () => {
     <div css={styles.wrapper(theme, headerHeight)}>
       <button
         type="button"
-        css={styles.addButton}
+        css={styles.addButton(theme)}
         onClick={openAddBookmarkModal}
       >
         <Plus color={darkTheme.grayDark.gray12} size="18" />
@@ -65,17 +65,18 @@ const styles = {
       height,
     });
   },
-  addButton: css({
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    color: 'white',
-    border: '1px solid white',
-    borderRadius: '4px',
-    backgroundColor: '#25262b',
-    padding: '6px 16px 6px 8px',
-    gap: '4px',
-  }),
+  addButton: (theme: Theme) =>
+    css({
+      cursor: 'pointer',
+      display: 'flex',
+      alignItems: 'center',
+      color: 'white',
+      borderRadius: '4px',
+      border: `1px solid ${theme.grayDark.gray6}`,
+      backgroundColor: theme.grayDark.gray4,
+      padding: '8px 16px 8px 8px',
+      gap: '4px',
+    }),
   sortSelect: css({
     borderRadius: '4px',
     width: '180px',
