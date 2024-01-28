@@ -59,7 +59,7 @@ const styles = {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      backgroundColor: theme.secondaryBackground,
+      backgroundColor: theme.grayDark.gray6,
       padding: '0 16px',
       height,
     });

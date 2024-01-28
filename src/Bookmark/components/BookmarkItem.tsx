@@ -87,7 +87,7 @@ const styles = {
       cursor: 'pointer',
       width: '100%',
       color: '#ffffff',
-      backgroundColor: theme.item.backgroundColor,
+      backgroundColor: theme.grayDark.gray7,
       borderRadius: 4,
       textOverflow: 'ellipsis',
       whiteSpace: 'nowrap',
