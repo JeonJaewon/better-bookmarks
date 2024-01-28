@@ -9,7 +9,7 @@ const styles = {
       flexDirection: 'column',
       width: 400,
       height: 460,
-      backgroundColor: theme.primaryBackground,
+      backgroundColor: theme.grayDark.gray3,
     }),
 };
 

@@ -23,6 +23,7 @@
     "@mantine/core": "^5.0.0",
     "@mantine/modals": "5.0",
     "@mantine/notifications": "^5.0.0",
+    "@radix-ui/colors": "^3.0.0",
     "dayjs": "^1.11.3",
     "framer-motion": "^6.3.11",
     "jotai": "^2.1.0",
