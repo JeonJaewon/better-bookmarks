@@ -9,8 +9,8 @@ import { openModal } from '@mantine/modals';
 import { darkTheme } from '@src/styles/themes';
 
 const FILTER_OPTIONS: { value: DateSortingOption; label: string }[] = [
-  { value: 'older', label: 'Date - Ascending' },
-  { value: 'newer', label: 'Date - Descending' },
+  { value: 'older', label: 'Date - Oldest to Newest' },
+  { value: 'newer', label: 'Date - Newest to Oldest' },
 ];
 
 export const Header = () => {
