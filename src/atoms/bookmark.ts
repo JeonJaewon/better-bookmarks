@@ -1,5 +1,5 @@
-import { BookmarkItemData } from '@src/Bookmark/types';
-import { setStorageItem, STORAGE_KEYS } from '@src/utils/storage';
+import { BookmarkItemData } from '@src/pages/Popup/types';
+import { setStorageItem, STORAGE_KEYS } from '@src/lib/utils/storage';
 import { atom } from 'jotai';
 
 export const bookmarksAtom = atom<BookmarkItemData[]>([]);

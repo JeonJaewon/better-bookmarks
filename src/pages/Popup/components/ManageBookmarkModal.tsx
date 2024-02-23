@@ -1,8 +1,8 @@
 import { css, Theme } from '@emotion/react';
-import { BookmarkItemData } from '@src/Bookmark/types';
+import { BookmarkItemData } from '@src/pages/Popup/types';
 import { Button } from '@mantine/core';
 import { useSetAtom } from 'jotai';
-import { deleteBookmarkAtom } from '@src/Bookmark/atoms';
+import { deleteBookmarkAtom } from '@src/atoms/bookmark';
 import { closeAllModals } from '@mantine/modals';
 import { Link } from 'react-feather';
 import { showNotification } from '@mantine/notifications';

@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
 import { useEffect } from 'react';
 import dayjs from 'dayjs';
-import { getStorageItem, STORAGE_KEYS } from '@src/utils/storage';
-import { BookmarkItem } from '@src/Bookmark/components/BookmarkItem';
+import { getStorageItem, STORAGE_KEYS } from '@src/lib/utils/storage';
+import { BookmarkItem } from '@src/pages/Popup/components/BookmarkItem';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { bookmarksAtom, swapBookmarkAtom } from '@src/Bookmark/atoms';
-import { dateSortingOptionAtom } from '@src/Filter/atoms';
-import { useCalculateSwapThreshold } from '@src/Bookmark/hooks/useCalculateSwapThreshold';
-import { bookmarkListPaddingTopAtom } from '@src/UI/atoms';
+import { bookmarksAtom, swapBookmarkAtom } from '@src/atoms/bookmark';
+import { dateSortingOptionAtom } from '@src/atoms/filter';
+import { useCalculateSwapThreshold } from '@src/pages/Popup/hooks/useCalculateSwapThreshold';
+import { bookmarkListPaddingTopAtom } from '@src/atoms/ui';
 
 export const BookmarkList = () => {
   const [dateSortingOption] = useAtom(dateSortingOptionAtom);

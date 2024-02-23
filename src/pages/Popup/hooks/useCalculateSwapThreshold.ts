@@ -3,7 +3,7 @@ import {
   bookmarkItemMarginBottomAtom,
   bookmarkListPaddingTopAtom,
   headerHeightAtom,
-} from '@src/UI/atoms';
+} from '@src/atoms/ui';
 import { useAtomValue } from 'jotai';
 
 type SwapType = 'UP' | 'DOWN';

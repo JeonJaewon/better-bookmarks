@@ -1,13 +1,13 @@
 import { css, Theme, useTheme } from '@emotion/react';
 import { openModal } from '@mantine/modals';
-import { ManageBookmarkModal } from '@src/Bookmark/components/ManageBookmarkModal';
-import { BookmarkItemData } from '@src/Bookmark/types';
+import { ManageBookmarkModal } from '@src/pages/Popup/components/ManageBookmarkModal';
+import { BookmarkItemData } from '@src/pages/Popup/types';
 import { Colors } from '@src/styles/colors';
 import { darkTheme } from '@src/styles/themes';
 import {
   bookmarkItemHeightAtom,
   bookmarkItemMarginBottomAtom,
-} from '@src/UI/atoms';
+} from '@src/atoms/ui';
 import dayjs from 'dayjs';
 import { motion } from 'framer-motion';
 import { useAtomValue } from 'jotai';

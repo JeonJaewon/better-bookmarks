@@ -1,12 +1,12 @@
 import { Button, TextInput } from '@mantine/core';
 import { closeAllModals } from '@mantine/modals';
 import { useEffect, useState } from 'react';
-import { setStorageItem, STORAGE_KEYS } from '@src/utils/storage';
-import { getCurrentTab } from '@src/utils/tabs';
+import { setStorageItem, STORAGE_KEYS } from '@src/lib/utils/storage';
+import { getCurrentTab } from '@src/lib/utils/tabs';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { addBookmarkAtom, bookmarksAtom } from '@src/Bookmark/atoms';
-import { BookmarkItemData } from '@src/Bookmark/types';
-import { getCurrentMilliseconds } from '@src/utils/time';
+import { addBookmarkAtom, bookmarksAtom } from '@src/atoms/bookmark';
+import { BookmarkItemData } from '@src/pages/Popup/types';
+import { getCurrentMilliseconds } from '@src/lib/utils/time';
 import { css } from '@emotion/react';
 
 export const AddBookmarkModal = () => {
