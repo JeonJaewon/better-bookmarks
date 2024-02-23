@@ -1,6 +1,6 @@
 import { css, Theme, useTheme } from '@emotion/react';
-import { BookmarkList } from '@src/Bookmark/components/BookmarkList';
-import { Header } from '@src/common/components/Header';
+import { BookmarkList } from '@src/pages/Popup/components/BookmarkList';
+import { Header } from '@src/pages/Popup/components/Header';
 
 const styles = {
   wrapper: (theme: Theme) =>
